@@ -4,8 +4,34 @@
   border-radius: 10px;
   padding: 16px;
 }
+
+.link {
+  color: rgb(160, 160, 244);
+}
+.back_btn {
+  display: flex;
+}
 .title {
+  /* margin-bottom: 24px; */
+}
+
+.info_container {
+  margin-top: 24px;
   margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  row-gap: 16px;
+  /* align-items: center; */
+}
+.scores {
+  display: flex;
+  flex-direction: column;
+}
+.times {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (prefers-color-scheme: dark) {
