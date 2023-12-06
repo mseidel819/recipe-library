@@ -1,0 +1,15 @@
+.container {
+  max-width: 700px;
+  background-color: rgb(246, 228, 207);
+  border-radius: 10px;
+  padding: 16px;
+}
+.title {
+  margin-bottom: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: rgb(27, 26, 26);
+  }
+}
