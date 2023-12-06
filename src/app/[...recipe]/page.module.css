@@ -10,9 +10,8 @@
 }
 .back_btn {
   display: flex;
-}
-.title {
-  /* margin-bottom: 24px; */
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 .info_container {

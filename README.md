@@ -1,9 +1,4 @@
 TODO:
-
-cook time details and rest of recipe data
-
-breadcrumbs to go back to main
-
 fuzzy search
 pagination
 
