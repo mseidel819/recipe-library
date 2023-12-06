@@ -68,8 +68,11 @@ export default function BasicTabs() {
           onChange={handleChange}
           textColor="secondary"
           indicatorColor="secondary"
-          aria-label="basic tabs example">
-          <Tab label="Bread" {...a11yProps(0)} className={styles.tab} />
+          aria-label="basic tabs example"
+          variant="scrollable"
+          scrollButtons
+          allowScrollButtonsMobile>
+          <Tab className={styles.tab} label="Bread" {...a11yProps(0)} />
           <Tab className={styles.tab} label="Breakfast" {...a11yProps(1)} />
           <Tab className={styles.tab} label="Cakes" {...a11yProps(2)} />
           <Tab className={styles.tab} label="Cookies" {...a11yProps(3)} />
