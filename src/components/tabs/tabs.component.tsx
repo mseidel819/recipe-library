@@ -1,17 +1,17 @@
 "use  client";
 
+import styles from "./tabs.module.css";
 import * as React from "react";
 import { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CardList from "@/components/card-list/card-list.component";
-import BreadData from "../../data/sallys-baking-addiction/bread.json";
-import BreakfastData from "../../data/sallys-baking-addiction/breakfast-treats.json";
-import CakeData from "../../data/sallys-baking-addiction/desserts-cakes.json";
-import CookieData from "../../data/sallys-baking-addiction/desserts-cookies.json";
-import PieData from "../../data/sallys-baking-addiction/desserts-pies.json";
+import BreadData from "../../../data/sallys-baking-addiction/bread.json";
+import BreakfastData from "../../../data/sallys-baking-addiction/breakfast-treats.json";
+import CakeData from "../../../data/sallys-baking-addiction/desserts-cakes.json";
+import CookieData from "../../../data/sallys-baking-addiction/desserts-cookies.json";
+import PieData from "../../../data/sallys-baking-addiction/desserts-pies.json";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -69,11 +69,11 @@ export default function BasicTabs() {
           textColor="secondary"
           indicatorColor="secondary"
           aria-label="basic tabs example">
-          <Tab label="Bread" {...a11yProps(0)} />
-          <Tab label="Breakfast" {...a11yProps(1)} />
-          <Tab label="Cakes" {...a11yProps(2)} />
-          <Tab label="Cookies" {...a11yProps(3)} />
-          <Tab label="Pies" {...a11yProps(4)} />
+          <Tab className={styles.tab} label="Bread" {...a11yProps(0)} />
+          <Tab className={styles.tab} label="Breakfast" {...a11yProps(1)} />
+          <Tab className={styles.tab} label="Cakes" {...a11yProps(2)} />
+          <Tab className={styles.tab} label="Cookies" {...a11yProps(3)} />
+          <Tab className={styles.tab} label="Pies" {...a11yProps(4)} />
         </Tabs>
       </Box>
       {Object.entries(dataObj).map(([key, val], index) => {

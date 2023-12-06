@@ -3,7 +3,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ImageCarousel from "../../ui/image-carousel";
+import ImageCarousel from "../image-carousel/image-carousel";
 
 const AccordionComponent = ({ recipe }) => {
   return (

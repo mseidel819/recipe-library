@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useMemo } from "react";
 
 import styles from "./page.module.css";
-import BasicTabs from "@/ui/tabs.component";
+import BasicTabs from "@/components/tabs/tabs.component";
 
 export default function Home() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
