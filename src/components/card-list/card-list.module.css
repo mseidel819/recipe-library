@@ -4,3 +4,8 @@
   gap: 16px;
   justify-content: center;
 }
+
+.search {
+  /* padding: 2px; */
+  margin-bottom: 12px;
+}
