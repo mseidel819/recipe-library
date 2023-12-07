@@ -23,7 +23,7 @@ const CardList = ({ data, category }) => {
   };
 
   return (
-    <div>
+    <div className={styles.big_container}>
       <TextField
         id="outlined-basic"
         label={`Search ${category}`}
