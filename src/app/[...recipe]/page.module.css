@@ -22,7 +22,6 @@
   flex-direction: row;
   justify-content: space-between;
   row-gap: 16px;
-  /* align-items: center; */
 }
 .scores {
   display: flex;

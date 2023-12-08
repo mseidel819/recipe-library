@@ -2,16 +2,16 @@
 
 import styles from "./tabs.module.css";
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import CardList from "@/components/card-list/card-list.component";
-import BreadData from "../../../data/sallys-baking-addiction/bread.json";
-import BreakfastData from "../../../data/sallys-baking-addiction/breakfast-treats.json";
-import CakeData from "../../../data/sallys-baking-addiction/desserts-cakes.json";
-import CookieData from "../../../data/sallys-baking-addiction/desserts-cookies.json";
-import PieData from "../../../data/sallys-baking-addiction/desserts-pies.json";
+import sallysData from "../../../data/sallys-baking-addiction.json";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setRecipes } from "@/store/recipes/recipes.slice";
+import { RootState } from "@/store/store";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -48,17 +48,25 @@ function a11yProps(index: number) {
 export default function BasicTabs() {
   const [value, setValue] = useState(0);
 
-  const dataObj = {
-    bread: BreadData,
-    "breakfast-treats": BreakfastData,
-    "desserts-cakes": CakeData,
-    "desserts-cookies": CookieData,
-    "desserts-pies": PieData,
-  };
+  const recipes = useSelector((state: RootState) => state.recipes);
+  const dispatch = useDispatch();
+
+  const sortedByCategory = recipes.recipes.reduce((acc, curr) => {
+    const category = curr.category;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(curr);
+    return acc;
+  }, {});
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    dispatch(setRecipes(sallysData));
+  }, [dispatch]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -72,14 +80,20 @@ export default function BasicTabs() {
           variant="scrollable"
           scrollButtons
           allowScrollButtonsMobile>
-          <Tab className={styles.tab} label="Bread" {...a11yProps(0)} />
-          <Tab className={styles.tab} label="Breakfast" {...a11yProps(1)} />
-          <Tab className={styles.tab} label="Cakes" {...a11yProps(2)} />
-          <Tab className={styles.tab} label="Cookies" {...a11yProps(3)} />
-          <Tab className={styles.tab} label="Pies" {...a11yProps(4)} />
+          {Object.entries(sortedByCategory).map(([key, val], index) => {
+            return (
+              <Tab
+                key={key + index}
+                className={styles.tab}
+                label={key}
+                {...a11yProps(index)}
+              />
+            );
+          })}
         </Tabs>
       </Box>
-      {Object.entries(dataObj).map(([key, val], index) => {
+
+      {Object.entries(sortedByCategory).map(([key, val], index) => {
         return (
           <CustomTabPanel key={index} value={value} index={index}>
             <CardList data={val} category={key} />
