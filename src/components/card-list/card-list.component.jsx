@@ -31,6 +31,7 @@ const CardList = ({ data, category }) => {
         onChange={onSearchChange}
         autoComplete="off"
         className={styles.search}
+        size="small"
       />
 
       <div className={styles.container}>

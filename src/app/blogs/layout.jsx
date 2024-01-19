@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 import useSetTheme from "@/hooks/useSetTheme";
 import BasicTabs from "@/components/tabs/tabs.component";
+import styles from "./layout.module.css";
 
 const TabsLayout = ({ children }) => {
   const router = useRouter();
@@ -46,7 +47,7 @@ const TabsLayout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div>
+      <div className={styles.container}>
         <BasicTabs
           componentType="authors"
           tabArray={authors}
