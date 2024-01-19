@@ -7,3 +7,28 @@
   width: 100%;
   max-width: 1000px;
 }
+
+.list {
+  margin-top: 32px;
+  background-color: none;
+  border-radius: 4px;
+}
+
+.list_item {
+  /* remove dots */
+  list-style-type: none;
+  margin-left: -20px;
+  margin-bottom: 8px;
+  padding: 4px 8px;
+  /* overflow: hidden; */
+  background-color: rgb(252, 224, 249);
+  border: 1px solid rgb(79, 78, 78);
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .list_item {
+    background-color: rgb(79, 3, 52);
+    border: 1px solid rgb(79, 78, 78);
+  }
+}

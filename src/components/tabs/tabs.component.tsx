@@ -36,7 +36,6 @@ export default function BasicTabs({
     if (componentType === "authors") {
       return tab.id === +author_id;
     }
-    console.log(tab, category_name);
     return tab === category_name;
   });
 

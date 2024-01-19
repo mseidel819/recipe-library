@@ -18,7 +18,9 @@ export default function Home() {
   }, [theme, themeHook]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/blog-recipes/authors")
+    fetch(
+      "http://ec2-18-118-138-187.us-east-2.compute.amazonaws.com/api/blog-recipes/authors"
+    )
       .then((res) => res.json())
       .then((data) => {
         setAuthors(data);
@@ -29,9 +31,9 @@ export default function Home() {
       <CssBaseline />
       <main className={styles.main}>
         <h1>Select a blog to begin</h1>
-        <ul>
+        <ul className={styles.list}>
           {authors.map((author) => (
-            <li key={author.id}>
+            <li key={author.id} className={styles.list_item}>
               <a href={`/blogs/${author.id}`}>
                 {author.name} - {author.total_recipes} recipes
               </a>

@@ -22,7 +22,7 @@ const Recipe = ({ params }) => {
 
   useEffect(() => {
     fetch(
-      `http://127.0.0.1:8000/api/blog-recipes/by-author/${author_id}/${recipe_id}`
+      `http://ec2-18-118-138-187.us-east-2.compute.amazonaws.com/api/blog-recipes/by-author/${author_id}/${recipe_id}`
     )
       .then((res) => res.json())
       .then((data) => {
