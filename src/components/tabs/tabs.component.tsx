@@ -2,7 +2,8 @@
 
 import styles from "./tabs.module.css";
 import * as React from "react";
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -13,25 +14,6 @@ interface TabPanelProps {
   value: number;
 }
 
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}>
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <div>{children}</div>
-        </Box>
-      )}
-    </div>
-  );
-}
-
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -39,26 +21,39 @@ function a11yProps(index: number) {
   };
 }
 
-// enter an array of tabs to display.
-// enter an array of categories to display.
-// main level displays tabs of author names. gets array of auth details
-// sub level displays categories based on the tab selected. gewts aray of categories from auth details
-// sub sub level displays cards based on the category selected. makes api call to get cards based on  author id and category
-
-export default function BasicTabs({ tabArray, handler, children }) {
+export default function BasicTabs({
+  componentType,
+  tabArray,
+  handler,
+  children,
+}) {
+  const pathName = usePathname();
   const [value, setValue] = useState(0);
+
+  const [_, _2, author_id, category_name] = pathName.split("/");
+
+  const tabValue = tabArray?.findIndex((tab) => {
+    if (componentType === "authors") {
+      return tab.id === +author_id;
+    }
+    console.log(tab, category_name);
+    return tab === category_name;
+  });
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     handler(tabArray[newValue]);
   };
 
-  React.useEffect(() => {
-    if (tabArray) {
+  useEffect(() => {
+    if (tabArray && tabValue !== -1) {
+      handler(tabArray[tabValue]);
+      setValue(tabValue);
+    } else if (tabArray) {
       handler(tabArray[0]);
       setValue(0);
     }
-  }, [tabArray]);
+  }, [tabArray, tabValue]);
 
   return (
     <Box sx={{ width: "100%" }}>

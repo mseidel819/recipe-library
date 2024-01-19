@@ -37,11 +37,13 @@ const CardList = ({ data, category }) => {
         {filteredData.map((card) => (
           <PreviewCard
             key={card.id}
-            slug={card.slug}
-            categories={card.categories}
-            img={card.main_image}
-            title={card.title}
-            rating={card.rating}
+            category={category}
+            {...card}
+            // slug={card.slug}
+            // categories={card.categories}
+            // img={card.main_image}
+            // title={card.title}
+            // rating={card.rating}
           />
         ))}
       </div>

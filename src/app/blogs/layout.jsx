@@ -1,7 +1,11 @@
 "use client";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+import useSetTheme from "@/hooks/useSetTheme";
 import BasicTabs from "@/components/tabs/tabs.component";
 
 const TabsLayout = ({ children }) => {
@@ -9,6 +13,13 @@ const TabsLayout = ({ children }) => {
   const [authors, setAuthors] = useState([]);
   const [selectedAuthor, setSelectedAuthor] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [theme, setTheme] = useState({});
+
+  const themeHook = useSetTheme();
+
+  useEffect(() => {
+    setTheme(themeHook);
+  }, [theme, themeHook]);
 
   const setAuthorHandler = (author) => {
     setSelectedAuthor(author);
@@ -33,16 +44,22 @@ const TabsLayout = ({ children }) => {
   }, [selectedAuthor, selectedCategory]);
 
   return (
-    <div>
-      <div>tab layout</div>
-      <BasicTabs tabArray={authors} handler={setAuthorHandler}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
         <BasicTabs
-          tabArray={selectedAuthor?.categories}
-          handler={setCategoryHandler}>
-          {children}
+          componentType="authors"
+          tabArray={authors}
+          handler={setAuthorHandler}>
+          <BasicTabs
+            componentType="categories"
+            tabArray={selectedAuthor?.categories}
+            handler={setCategoryHandler}>
+            {children}
+          </BasicTabs>
         </BasicTabs>
-      </BasicTabs>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 };
 

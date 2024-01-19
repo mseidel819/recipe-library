@@ -1,27 +1,21 @@
 "use client";
 
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useEffect, useState } from "react";
+import useSetTheme from "@/hooks/useSetTheme";
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { useMemo, useEffect } from "react";
 
 import styles from "./page.module.css";
-import BasicTabs from "@/components/tabs/tabs.component";
-import React from "react";
 
 export default function Home() {
   const [authors, setAuthors] = React.useState([]);
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [theme, setTheme] = useState({});
 
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
-  );
+  const themeHook = useSetTheme();
+
+  useEffect(() => {
+    setTheme(themeHook);
+  }, [theme, themeHook]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/blog-recipes/authors")
@@ -44,7 +38,6 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        {/* <BasicTabs /> */}
       </main>
     </ThemeProvider>
   );

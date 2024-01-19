@@ -24,7 +24,12 @@ const ImageCarousel = ({ images }) => {
         <Carousel {...getConfigurableProps()}>
           {images.map((image) => (
             <div className={styles.image_container} key={image}>
-              <Image className={styles.image} fill src={image} alt="" />
+              <Image
+                className={styles.image}
+                fill
+                src={image.image_url}
+                alt={image.name}
+              />
             </div>
           ))}
         </Carousel>

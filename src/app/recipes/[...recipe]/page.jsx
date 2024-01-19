@@ -1,56 +1,43 @@
 "use client";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useEffect, useState, useMemo } from "react";
-import Link from "next/link";
-import BreadData from "../../../../data/sallys-baking-addiction/bread.json";
-import BreakfastData from "../../../../data/sallys-baking-addiction/breakfast-treats.json";
-import CakeData from "../../../../data/sallys-baking-addiction/desserts-cakes.json";
-import CookieData from "../../../../data/sallys-baking-addiction/desserts-cookies.json";
-import PieData from "../../../../data/sallys-baking-addiction/desserts-pies.json";
+import useSetTheme from "@/hooks/useSetTheme";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import AccordionComponent from "../../../components/accordion/accordion.component.jsx";
 
 const Recipe = ({ params }) => {
+  const router = useRouter();
   const [recipe, setRecipe] = useState({});
-  const [category, slug] = params.recipe;
+  const [author_id, recipe_id] = params.recipe;
+  const [theme, setTheme] = useState({});
 
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
-  );
+  const themeHook = useSetTheme();
 
   useEffect(() => {
-    const dataObj = {
-      bread: BreadData,
-      "breakfast-treats": BreakfastData,
-      "desserts-cakes": CakeData,
-      "desserts-cookies": CookieData,
-      "desserts-pies": PieData,
-    };
-    const foundRecipe = dataObj[category].find((item) => item.slug === slug);
-    setRecipe(foundRecipe);
-  }, [slug, category]);
-  // prep time, cook time, total time,
-  //  link, num_reviews,serves, rating(out of num_reviews)
+    setTheme(themeHook);
+  }, [theme, themeHook]);
+
+  useEffect(() => {
+    fetch(
+      `http://127.0.0.1:8000/api/blog-recipes/by-author/${author_id}/${recipe_id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setRecipe(data);
+      });
+  }, [author_id, recipe_id]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={styles.container}>
-        <Link className={styles.back_btn} href="/">
+        <button className={styles.back_btn} onClick={() => router.back()}>
           <ArrowBackIcon />
           Back
-        </Link>
+        </button>
 
         <h1 className={styles.title}>{recipe.title}</h1>
         <a className={styles.link} href={recipe.link}>
@@ -64,7 +51,7 @@ const Recipe = ({ params }) => {
             </span>
             <span>
               <strong>Servings: </strong>
-              {recipe.serves}
+              {recipe.servings}
             </span>
           </div>
           <div className={styles.times}>

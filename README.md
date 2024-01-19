@@ -1,6 +1,9 @@
 TODO:
-fuzzy search
 pagination
+
+wrap the app with the theme ONCE, and pass it down to all the components that need it.
+
+[]: # Path: README.md
 
 Nav-bar:
 
