@@ -4,13 +4,22 @@ import styles from "./card-preview.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const PreviewCard = ({ img, title, rating, slug, category }) => {
+const PreviewCard = ({
+  category,
+  main_image,
+  title,
+  rating,
+  slug,
+  categories,
+  id,
+  author,
+}) => {
   return (
-    <Link href={category + "/" + slug} className={styles.container}>
+    <Link href={`/recipes/${author.id}/${id}`} className={styles.container}>
       <div className={styles.img_container}>
         <Image
           className={styles.img}
-          src={img}
+          src={main_image}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"

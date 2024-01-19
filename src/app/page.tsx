@@ -1,30 +1,45 @@
 "use client";
 
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useEffect, useState } from "react";
+import useSetTheme from "@/hooks/useSetTheme";
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { useMemo } from "react";
 
 import styles from "./page.module.css";
-import BasicTabs from "@/components/tabs/tabs.component";
 
 export default function Home() {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [authors, setAuthors] = React.useState([]);
+  const [theme, setTheme] = useState({});
 
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
-  );
+  const themeHook = useSetTheme();
+
+  useEffect(() => {
+    setTheme(themeHook);
+  }, [theme, themeHook]);
+
+  useEffect(() => {
+    fetch(
+      "http://ec2-18-118-138-187.us-east-2.compute.amazonaws.com/api/blog-recipes/authors"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setAuthors(data);
+      });
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main className={styles.main}>
-        <BasicTabs />
+        <h1>Select a blog to begin</h1>
+        <ul className={styles.list}>
+          {authors.map((author) => (
+            <li key={author.id} className={styles.list_item}>
+              <a href={`/blogs/${author.id}`}>
+                {author.name} - {author.total_recipes} recipes
+              </a>
+            </li>
+          ))}
+        </ul>
       </main>
     </ThemeProvider>
   );
