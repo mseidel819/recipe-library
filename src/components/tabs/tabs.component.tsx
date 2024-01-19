@@ -8,11 +8,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+import type { Author } from "../../types";
 
 function a11yProps(index: number) {
   return {
@@ -21,19 +17,26 @@ function a11yProps(index: number) {
   };
 }
 
+type Props = {
+  componentType: "authors" | "categories";
+  tabArray: Author[] | string[];
+  handler: (selectedTab: Author | string) => void;
+  children: React.ReactNode;
+};
+
 export default function BasicTabs({
   componentType,
   tabArray,
   handler,
   children,
-}) {
+}: Props) {
   const pathName = usePathname();
   const [value, setValue] = useState(0);
 
   const [_, _2, author_id, category_name] = pathName.split("/");
 
   const tabValue = tabArray?.findIndex((tab) => {
-    if (componentType === "authors") {
+    if (typeof tab === "object" && componentType === "authors" && "id" in tab) {
       return tab.id === +author_id;
     }
     return tab === category_name;
@@ -70,24 +73,31 @@ export default function BasicTabs({
           allowScrollButtonsMobile>
           {tabArray &&
             tabArray.map((info, index: number) => {
-              if (info.name) {
+              if (
+                typeof info === "object" &&
+                componentType === "authors" &&
+                "id" in info &&
+                "name" in info
+              ) {
                 return (
                   <Tab
-                    key={info.name + index}
+                    key={info.id}
                     className={styles.tab}
                     label={info.name}
                     {...a11yProps(index)}
                   />
                 );
               }
-              return (
-                <Tab
-                  key={info + index}
-                  className={styles.tab}
-                  label={info}
-                  {...a11yProps(index)}
-                />
-              );
+              if (componentType === "categories" && typeof info === "string") {
+                return (
+                  <Tab
+                    key={info + index}
+                    className={styles.tab}
+                    label={info}
+                    {...a11yProps(index)}
+                  />
+                );
+              }
             })}
         </Tabs>
       </Box>
