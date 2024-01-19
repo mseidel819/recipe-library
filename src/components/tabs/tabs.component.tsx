@@ -2,16 +2,10 @@
 
 import styles from "./tabs.module.css";
 import * as React from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import CardList from "@/components/card-list/card-list.component";
-import BreadData from "../../../data/sallys-baking-addiction/bread.json";
-import BreakfastData from "../../../data/sallys-baking-addiction/breakfast-treats.json";
-import CakeData from "../../../data/sallys-baking-addiction/desserts-cakes.json";
-import CookieData from "../../../data/sallys-baking-addiction/desserts-cookies.json";
-import PieData from "../../../data/sallys-baking-addiction/desserts-pies.json";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -45,20 +39,26 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
-  const [value, setValue] = useState(0);
+// enter an array of tabs to display.
+// enter an array of categories to display.
+// main level displays tabs of author names. gets array of auth details
+// sub level displays categories based on the tab selected. gewts aray of categories from auth details
+// sub sub level displays cards based on the category selected. makes api call to get cards based on  author id and category
 
-  const dataObj = {
-    bread: BreadData,
-    "breakfast-treats": BreakfastData,
-    "desserts-cakes": CakeData,
-    "desserts-cookies": CookieData,
-    "desserts-pies": PieData,
-  };
+export default function BasicTabs({ tabArray, handler, children }) {
+  const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    handler(tabArray[newValue]);
   };
+
+  React.useEffect(() => {
+    if (tabArray) {
+      handler(tabArray[0]);
+      setValue(0);
+    }
+  }, [tabArray]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -72,20 +72,30 @@ export default function BasicTabs() {
           variant="scrollable"
           scrollButtons
           allowScrollButtonsMobile>
-          <Tab className={styles.tab} label="Bread" {...a11yProps(0)} />
-          <Tab className={styles.tab} label="Breakfast" {...a11yProps(1)} />
-          <Tab className={styles.tab} label="Cakes" {...a11yProps(2)} />
-          <Tab className={styles.tab} label="Cookies" {...a11yProps(3)} />
-          <Tab className={styles.tab} label="Pies" {...a11yProps(4)} />
+          {tabArray &&
+            tabArray.map((info, index: number) => {
+              if (info.name) {
+                return (
+                  <Tab
+                    key={info.name + index}
+                    className={styles.tab}
+                    label={info.name}
+                    {...a11yProps(index)}
+                  />
+                );
+              }
+              return (
+                <Tab
+                  key={info + index}
+                  className={styles.tab}
+                  label={info}
+                  {...a11yProps(index)}
+                />
+              );
+            })}
         </Tabs>
       </Box>
-      {Object.entries(dataObj).map(([key, val], index) => {
-        return (
-          <CustomTabPanel key={index} value={value} index={index}>
-            <CardList data={val} category={key} />
-          </CustomTabPanel>
-        );
-      })}
+      {children}
     </Box>
   );
 }

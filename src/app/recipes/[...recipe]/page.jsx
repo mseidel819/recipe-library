@@ -5,13 +5,13 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
-import BreadData from "../../../data/sallys-baking-addiction/bread.json";
-import BreakfastData from "../../../data/sallys-baking-addiction/breakfast-treats.json";
-import CakeData from "../../../data/sallys-baking-addiction/desserts-cakes.json";
-import CookieData from "../../../data/sallys-baking-addiction/desserts-cookies.json";
-import PieData from "../../../data/sallys-baking-addiction/desserts-pies.json";
+import BreadData from "../../../../data/sallys-baking-addiction/bread.json";
+import BreakfastData from "../../../../data/sallys-baking-addiction/breakfast-treats.json";
+import CakeData from "../../../../data/sallys-baking-addiction/desserts-cakes.json";
+import CookieData from "../../../../data/sallys-baking-addiction/desserts-cookies.json";
+import PieData from "../../../../data/sallys-baking-addiction/desserts-pies.json";
 import styles from "./page.module.css";
-import AccordionComponent from "../../components/accordion/accordion.component.jsx";
+import AccordionComponent from "../../../components/accordion/accordion.component.jsx";
 
 const Recipe = ({ params }) => {
   const [recipe, setRecipe] = useState({});
