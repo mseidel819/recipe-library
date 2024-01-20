@@ -21,7 +21,8 @@ const PreviewCard = ({
       <div className={styles.img_container}>
         <Image
           className={styles.img}
-          src={main_image}
+          src={imgUrl.pathname}
+          // src={main_image}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
