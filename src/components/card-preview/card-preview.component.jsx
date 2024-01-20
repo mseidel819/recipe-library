@@ -14,6 +14,8 @@ const PreviewCard = ({
   id,
   author,
 }) => {
+  const imgUrl = new URL(main_image);
+  console.log(imgUrl.pathname);
   return (
     <Link href={`/recipes/${author.id}/${id}`} className={styles.container}>
       <div className={styles.img_container}>
