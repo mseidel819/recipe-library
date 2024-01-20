@@ -22,16 +22,20 @@ const ImageCarousel = ({ images }) => {
     return (
       <div className={styles.container}>
         <Carousel {...getConfigurableProps()}>
-          {images.map((image) => (
-            <div className={styles.image_container} key={image}>
-              <Image
-                className={styles.image}
-                fill
-                src={image.image_url}
-                alt={image.name}
-              />
-            </div>
-          ))}
+          {images.map((image) => {
+            const imgUrl = new URL(image.image_url);
+
+            return (
+              <div className={styles.image_container} key={image}>
+                <Image
+                  className={styles.image}
+                  fill
+                  src={imgUrl.pathname}
+                  alt={image.name}
+                />
+              </div>
+            );
+          })}
         </Carousel>
       </div>
     );
