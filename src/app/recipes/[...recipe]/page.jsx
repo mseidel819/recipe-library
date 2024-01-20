@@ -22,7 +22,7 @@ const Recipe = ({ params }) => {
 
   useEffect(() => {
     fetch(
-      `https://peppy-alpaca-9050d7.netlify.app/api/api/blog-recipes/by-author/${author_id}/${recipe_id}`
+      `https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/by-author/${author_id}/${recipe_id}`
     )
       .then((res) => res.json())
       .then((data) => {

@@ -25,7 +25,7 @@ const AuthorPage = ({ params }) => {
 
   useEffect(() => {
     fetch(
-      `https://peppy-alpaca-9050d7.netlify.app/api/api/blog-recipes/by-author/${author_id}/?categories=${category}`
+      `https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/by-author/${author_id}/?categories=${category}`
     )
       .then((res) => res.json())
       .then((data) => {

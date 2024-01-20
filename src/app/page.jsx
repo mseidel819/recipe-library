@@ -18,9 +18,7 @@ export default function Home() {
   }, [theme, themeHook]);
 
   useEffect(() => {
-    fetch(
-      "https://peppy-alpaca-9050d7.netlify.app/api/api/blog-recipes/authors"
-    )
+    fetch("https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/authors")
       .then((res) => res.json())
       .then((data) => {
         setAuthors(data);
