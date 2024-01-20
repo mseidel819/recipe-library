@@ -32,7 +32,7 @@ const TabsLayout = ({ children }) => {
 
   useEffect(() => {
     fetch(
-      "http://ec2-18-118-138-187.us-east-2.compute.amazonaws.com/api/blog-recipes/authors"
+      "https://peppy-alpaca-9050d7.netlify.app/api/api/blog-recipes/authors"
     )
       .then((res) => res.json())
       .then((data) => {
