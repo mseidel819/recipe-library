@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/api"
+  to = "http://ec2-18-118-138-187.us-east-2.compute.amazonaws.com"
+  conditions = {Language = ["en","es"], Country = ["US"]}
