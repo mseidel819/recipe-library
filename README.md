@@ -1,3 +1,5 @@
+Live Site: <a href="https://peppy-alpaca-9050d7.netlify.app/" target="_blank">IdidntAskForYourLifeStoryJustGiveMeTheRecipe.com</a>
+
 TODO:
 pagination
 
@@ -10,6 +12,6 @@ Nav-bar:
 - [] login/logout
 - [] search all
 
-"/" home page
-"select a blog to begin" is default. no recipes show.
-"vertical list of butons for blog entry"
+prod and env setups?
+
+- always go to prod api. image routes need help.
