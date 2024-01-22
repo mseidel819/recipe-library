@@ -2,33 +2,18 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useEffect, useState, useMemo } from "react";
 import useSetTheme from "@/hooks/useSetTheme";
+import useFetchRecipe from "@/hooks/useFetchRecipe";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import AccordionComponent from "../../../components/accordion/accordion.component.jsx";
 
 const Recipe = ({ params }) => {
   const router = useRouter();
-  const [recipe, setRecipe] = useState({});
   const [author_id, recipe_id] = params.recipe;
-  const [theme, setTheme] = useState({});
 
-  const themeHook = useSetTheme();
-
-  useEffect(() => {
-    setTheme(themeHook);
-  }, [theme, themeHook]);
-
-  useEffect(() => {
-    fetch(
-      `https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/by-author/${author_id}/${recipe_id}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setRecipe(data);
-      });
-  }, [author_id, recipe_id]);
+  const theme = useSetTheme();
+  const recipe = useFetchRecipe({ author_id, recipe_id });
 
   return (
     <ThemeProvider theme={theme}>

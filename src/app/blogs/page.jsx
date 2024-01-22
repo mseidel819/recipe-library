@@ -1,27 +1,13 @@
 "use client";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { useEffect, useState, useMemo } from "react";
+import useSetTheme from "@/hooks/useSetTheme";
 
 import TabsLayout from "./layout";
 
 const BlogPage = () => {
-  //   const { data, error } = useSWR("/api/blogs", fetcher);
+  const theme = useSetTheme();
 
-  //   if (error) return <div>failed to load</div>;
-  //   if (!data) return <div>loading...</div>;
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
-  );
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

@@ -30,6 +30,7 @@ const ImageCarousel = ({ images }) => {
                 <Image
                   className={styles.image}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   src={imgURLFull}
                   // src={imgUrl.pathname}
                   alt={image.name}
