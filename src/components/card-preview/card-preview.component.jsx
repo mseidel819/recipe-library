@@ -4,16 +4,7 @@ import styles from "./card-preview.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const PreviewCard = ({
-  category,
-  main_image,
-  title,
-  rating,
-  slug,
-  categories,
-  id,
-  author,
-}) => {
+const PreviewCard = ({ main_image, title, rating, id, author }) => {
   const imgUrl = new URL(main_image);
   const imgURLFull = `${process.env.NEXT_PUBLIC_IMAGE_URL}${imgUrl.pathname}`;
 
@@ -23,7 +14,6 @@ const PreviewCard = ({
         <Image
           className={styles.img}
           src={imgURLFull}
-          // src={imgUrl.pathname}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"

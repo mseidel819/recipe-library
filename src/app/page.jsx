@@ -1,6 +1,4 @@
 "use client";
-
-import { useEffect, useState } from "react";
 import useSetTheme from "@/hooks/useSetTheme";
 import useFetchAuthors from "@/hooks/useFetchAuthors";
 import { ThemeProvider } from "@mui/material/styles";

@@ -36,16 +36,7 @@ const CardList = ({ data, category }) => {
 
       <div className={styles.container}>
         {filteredData.map((card) => (
-          <PreviewCard
-            key={card.id}
-            category={category}
-            {...card}
-            // slug={card.slug}
-            // categories={card.categories}
-            // img={card.main_image}
-            // title={card.title}
-            // rating={card.rating}
-          />
+          <PreviewCard key={card.id} category={category} {...card} />
         ))}
       </div>
     </div>

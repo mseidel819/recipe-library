@@ -1,7 +1,6 @@
 //custom hook that sets the theme
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import { useMemo } from "react";
 
 const useSetTheme = () => {
