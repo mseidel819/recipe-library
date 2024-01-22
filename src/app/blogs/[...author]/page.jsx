@@ -19,7 +19,7 @@ const AuthorPage = ({ params }) => {
     <ThemeProvider theme={themeHook}>
       <CssBaseline />
       <div>
-        <CardList data={data} category={category} />
+        <CardList data={data} category={category} isPending={isPending} />
       </div>
     </ThemeProvider>
   );

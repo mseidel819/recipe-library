@@ -3,6 +3,8 @@
 import styles from "./card-preview.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import Typeography from "@mui/material/Typography";
+import Skeleton from "@mui/material/Skeleton";
 
 const PreviewCard = ({ main_image, title, rating, id, author }) => {
   const imgUrl = new URL(main_image);
@@ -17,10 +19,13 @@ const PreviewCard = ({ main_image, title, rating, id, author }) => {
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
+          placeholder="blur"
+          blurDataURL={imgURLFull}
         />
       </div>
       <div className={styles.text_container}>
-        <div>{title}</div>
+        <h2 className={styles.title}>{title}</h2>
+
         <span>Rating: {rating}</span>
       </div>
     </Link>
