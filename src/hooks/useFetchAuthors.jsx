@@ -1,19 +1,22 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+const fetchAuthors = () => {
+  return fetch(
+    "https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/authors"
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      return data;
+    });
+};
 
 const useFetchAuthors = () => {
-  const [authors, setAuthors] = useState([]);
-
-  useEffect(() => {
-    fetch("https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/authors")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setAuthors(data);
-      });
-  }, []);
-
-  return authors;
+  return useQuery({
+    queryKey: ["authors"],
+    queryFn: () => fetchAuthors(),
+  });
 };
 
 export default useFetchAuthors;

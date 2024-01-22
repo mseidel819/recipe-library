@@ -10,13 +10,16 @@ const AuthorPage = ({ params }) => {
   const [author_id, category] = params.author;
 
   const themeHook = useSetTheme();
-  const fetchedRecipes = useFetchRecipes({ author_id, category });
+  const { isPending, isFetching, isError, data } = useFetchRecipes(
+    author_id,
+    category
+  );
 
   return (
     <ThemeProvider theme={themeHook}>
       <CssBaseline />
       <div>
-        <CardList data={fetchedRecipes} category={category} />
+        <CardList data={data} category={category} />
       </div>
     </ThemeProvider>
   );

@@ -35,7 +35,7 @@ const CardList = ({ data, category }) => {
       />
 
       <div className={styles.container}>
-        {filteredData.map((card) => (
+        {filteredData?.map((card) => (
           <PreviewCard key={card.id} category={category} {...card} />
         ))}
       </div>

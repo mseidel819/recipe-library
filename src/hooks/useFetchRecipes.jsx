@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-const useFetchRecipes = ({ author_id, category }) => {
-  const [recipes, setRecipes] = useState([]);
+const fetchRecipes = (author_id, category) => {
+  return fetch(
+    `https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/by-author/${author_id}/?categories=${category}`
+  )
+    .then((res) => res.json())
+    .then((data) => data);
+};
 
-  useEffect(() => {
-    fetch(
-      `https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/by-author/${author_id}/?categories=${category}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setRecipes(data);
-      });
-  }, [author_id, category]);
-
-  return recipes;
+const useFetchRecipes = (author_id, category) => {
+  return useQuery({
+    queryKey: ["recipes"],
+    queryFn: () => fetchRecipes(author_id, category),
+  });
 };
 
 export default useFetchRecipes;

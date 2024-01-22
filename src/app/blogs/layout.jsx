@@ -15,7 +15,7 @@ const TabsLayout = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const theme = useSetTheme();
-  const authors = useFetchAuthors();
+  const { data } = useFetchAuthors();
 
   const setAuthorHandler = (author) => {
     setSelectedAuthor(author);
@@ -35,17 +35,19 @@ const TabsLayout = ({ children }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={styles.container}>
-        <BasicTabs
-          componentType="authors"
-          tabArray={authors}
-          handler={setAuthorHandler}>
+        {
           <BasicTabs
-            componentType="categories"
-            tabArray={selectedAuthor?.categories}
-            handler={setCategoryHandler}>
-            {children}
+            componentType="authors"
+            tabArray={data}
+            handler={setAuthorHandler}>
+            <BasicTabs
+              componentType="categories"
+              tabArray={selectedAuthor?.categories}
+              handler={setCategoryHandler}>
+              {children}
+            </BasicTabs>
           </BasicTabs>
-        </BasicTabs>
+        }
       </div>
     </ThemeProvider>
   );

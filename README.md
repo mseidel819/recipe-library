@@ -7,6 +7,7 @@ search to backend
 wrap the app with the theme ONCE, and pass it down to all the components that need it.
 
 fetch authors and move to context?
+reduce fetch calls.
 
 Nav-bar:
 
