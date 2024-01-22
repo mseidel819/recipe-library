@@ -15,13 +15,15 @@ const PreviewCard = ({
   author,
 }) => {
   const imgUrl = new URL(main_image);
+  const imgURLFull = `${process.env.NEXT_PUBLIC_IMAGE_URL}${imgUrl.pathname}`;
+
   return (
     <Link href={`/recipes/${author.id}/${id}`} className={styles.container}>
       <div className={styles.img_container}>
         <Image
           className={styles.img}
-          src={imgUrl.pathname}
-          // src={main_image}
+          src={imgURLFull}
+          // src={imgUrl.pathname}
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"

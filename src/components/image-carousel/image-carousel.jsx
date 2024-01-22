@@ -24,13 +24,14 @@ const ImageCarousel = ({ images }) => {
         <Carousel {...getConfigurableProps()}>
           {images.map((image) => {
             const imgUrl = new URL(image.image_url);
-
+            const imgURLFull = `${process.env.NEXT_PUBLIC_IMAGE_URL}${imgUrl.pathname}`;
             return (
               <div className={styles.image_container} key={image}>
                 <Image
                   className={styles.image}
                   fill
-                  src={imgUrl.pathname}
+                  src={imgURLFull}
+                  // src={imgUrl.pathname}
                   alt={image.name}
                 />
               </div>
