@@ -50,6 +50,7 @@ export default function BasicTabs({
   useEffect(() => {
     if (tabArray && tabValue !== -1) {
       handler(tabArray[tabValue]);
+      console.log("tabValue", tabValue);
       setValue(tabValue);
     } else if (tabArray) {
       handler(tabArray[0]);

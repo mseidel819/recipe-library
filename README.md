@@ -6,9 +6,9 @@ link number of results per page to backend
 refresh resets page number. stop that.
 
 fetch authors and move to context?
-reduce fetch calls.
 
 image preview stretching
+prod image error
 error states
 
 Nav-bar:

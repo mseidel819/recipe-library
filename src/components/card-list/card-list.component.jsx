@@ -7,33 +7,33 @@ import PreviewCard from "../card-preview/card-preview.component";
 import CardPreviewLoader from "../loaders/preview-card/card-preview-loader.component";
 import styles from "./card-list.module.css";
 
-const CardList = ({ data, category, isPending }) => {
-  const [searchField, setSearchField] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
+const CardList = ({ data, isPending }) => {
+  // const [searchField, setSearchField] = useState("");
+  // const [filteredData, setFilteredData] = useState(data);
 
-  const searcher = new FuzzySearch(data, ["title"], {});
+  // const searcher = new FuzzySearch(data, ["title"], {});
 
-  useEffect(() => {
-    const results = searcher.search(searchField);
-    setFilteredData(results);
-  }, [data, searchField]);
+  // useEffect(() => {
+  //   const results = searcher.search(searchField);
+  //   setFilteredData(results);
+  // }, [data, searchField]);
 
-  const onSearchChange = (event) => {
-    const searchFieldString = event.target.value.toLocaleLowerCase();
-    setSearchField(searchFieldString);
-  };
+  // const onSearchSubmit = (event) => {
+  //   const searchFieldString = event.target.value.toLocaleLowerCase();
+  //   setSearchField(searchFieldString);
+  // };
 
   return (
     <div className={styles.big_container}>
-      <TextField
+      {/* <TextField
         id="outlined-basic"
         label={`Search ${category}`}
         variant="outlined"
-        onChange={onSearchChange}
+        onSubmit={onSearchSubmit}
         autoComplete="off"
         className={styles.search}
         size="small"
-      />
+      /> */}
 
       <div className={styles.container}>
         {isPending &&
@@ -41,9 +41,7 @@ const CardList = ({ data, category, isPending }) => {
             .fill()
             .map((_, i) => <CardPreviewLoader key={i} />)}
         {!isPending &&
-          filteredData?.map((card) => (
-            <PreviewCard key={card.id} category={category} {...card} />
-          ))}
+          data?.map((card) => <PreviewCard key={card.id} {...card} />)}
       </div>
     </div>
   );
