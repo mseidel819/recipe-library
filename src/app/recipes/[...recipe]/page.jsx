@@ -17,7 +17,6 @@ const Recipe = ({ params }) => {
     isError,
     data: recipe,
   } = useFetchRecipe({ author_id, recipe_id });
-
   if (isPending) {
     return (
       <div>

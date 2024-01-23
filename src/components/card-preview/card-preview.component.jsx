@@ -3,9 +3,7 @@ import { useState } from "react";
 import styles from "./card-preview.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import Typeography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
-import CardPreviewLoader from "../loaders/preview-card/card-preview-loader.component";
 
 const PreviewCard = ({ main_image, title, rating, id, author }) => {
   const [imgLoading, setImgLoading] = useState(true);

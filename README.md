@@ -1,8 +1,9 @@
 Live Site: <a href="https://peppy-alpaca-9050d7.netlify.app/" target="_blank">IdidntAskForYourLifeStoryJustGiveMeTheRecipe.com</a>
 
 TODO:
-pagination(backend)
 search to backend
+link number of results per page to backend
+refresh resets page number. stop that.
 
 fetch authors and move to context?
 reduce fetch calls.
