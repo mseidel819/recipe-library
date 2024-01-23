@@ -47,7 +47,6 @@ const AuthorPage = ({ params }) => {
         variant="outlined"
         onKeyDown={handleKeyDown}
         autoComplete="off"
-        className={styles.search}
         size="small"
       />
       <CardList data={data?.results} isPending={isPending} />
