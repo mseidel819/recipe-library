@@ -8,7 +8,7 @@ import Skeleton from "@mui/material/Skeleton";
 const PreviewCard = ({ main_image, title, rating, id, author }) => {
   const [imgLoading, setImgLoading] = useState(true);
   const imgUrl = new URL(main_image);
-  const imgURLFull = `${process.env.NEXT_PUBLIC_API_URL}${imgUrl.pathname}`;
+  const imgURLFull = `${process.env.NEXT_PUBLIC_IMAGE_URL}${imgUrl.pathname}`;
 
   const handleImgLoad = () => {
     setImgLoading(false);
