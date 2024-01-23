@@ -4,7 +4,7 @@ const CardPreviewLoader = () => {
   return (
     <div className={styles.card_preview_loader}>
       <div className={styles.card_preview_loader_img}>
-        <Skeleton variant="rectangular" width={100} height={100} />
+        <Skeleton variant="rectangular" width={74} height={100} />
       </div>
 
       <div className={styles.card_preview_loader__text}>

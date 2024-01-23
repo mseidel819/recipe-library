@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
 const fetchAuthors = () => {
-  return fetch(
-    "https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/authors"
-  )
+  const url = process.env.NEXT_PUBLIC_API_URL;
+
+  return fetch(`${url}/api/blog-recipes/authors`)
     .then((res) => {
       return res.json();
     })

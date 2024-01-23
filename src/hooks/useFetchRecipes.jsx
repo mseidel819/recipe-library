@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
 const fetchRecipes = (author_id, category) => {
+  const url = process.env.NEXT_PUBLIC_IMAGE_URL;
   return fetch(
-    `https://peppy-alpaca-9050d7.netlify.app/api/blog-recipes/by-author/${author_id}/?categories=${category}`
+    `${url}/api/blog-recipes/by-author/${author_id}/?categories=${category}`
   )
     .then((res) => res.json())
     .then((data) => data);

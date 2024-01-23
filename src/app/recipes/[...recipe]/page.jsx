@@ -1,18 +1,16 @@
 "use client";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
+
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import useSetTheme from "@/hooks/useSetTheme";
 import useFetchRecipe from "@/hooks/useFetchRecipe";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import AccordionComponent from "../../../components/accordion/accordion.component.jsx";
+import RecipeLoader from "../../../components/loaders/recipe/recipe-loader.component.jsx";
 
 const Recipe = ({ params }) => {
   const router = useRouter();
   const [author_id, recipe_id] = params.recipe;
 
-  const theme = useSetTheme();
   const {
     isPending,
     isFetching,
@@ -20,9 +18,22 @@ const Recipe = ({ params }) => {
     data: recipe,
   } = useFetchRecipe({ author_id, recipe_id });
 
+  if (isPending) {
+    return (
+      <div>
+        <div className={styles.container}>
+          <button className={styles.back_btn} onClick={() => router.back()}>
+            <ArrowBackIcon />
+            Back
+          </button>
+          <RecipeLoader />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <div>
       {recipe && (
         <div className={styles.container}>
           <button className={styles.back_btn} onClick={() => router.back()}>
@@ -63,7 +74,7 @@ const Recipe = ({ params }) => {
           <AccordionComponent recipe={recipe} />
         </div>
       )}
-    </ThemeProvider>
+    </div>
   );
 };
 
