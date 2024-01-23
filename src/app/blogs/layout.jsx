@@ -1,6 +1,5 @@
 "use client";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -15,7 +14,7 @@ const TabsLayout = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const theme = useSetTheme();
-  const authors = useFetchAuthors();
+  const { data } = useFetchAuthors();
 
   const setAuthorHandler = (author) => {
     setSelectedAuthor(author);
@@ -32,12 +31,11 @@ const TabsLayout = ({ children }) => {
   }, [selectedAuthor, selectedCategory]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className={styles.container}>
+    <div className={styles.container}>
+      {
         <BasicTabs
           componentType="authors"
-          tabArray={authors}
+          tabArray={data}
           handler={setAuthorHandler}>
           <BasicTabs
             componentType="categories"
@@ -46,8 +44,8 @@ const TabsLayout = ({ children }) => {
             {children}
           </BasicTabs>
         </BasicTabs>
-      </div>
-    </ThemeProvider>
+      }
+    </div>
   );
 };
 

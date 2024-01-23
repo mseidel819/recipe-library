@@ -1,0 +1,61 @@
+.recipe_loader {
+  max-width: 100%;
+}
+
+.title {
+  margin-bottom: 12px;
+  width: 65%;
+}
+
+.info_container {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 16px;
+}
+
+.rating {
+  width: 250px;
+}
+
+.servings {
+  width: 100px;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prep {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.prep_item {
+  width: 180px;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+@media screen and (max-width: 500px) {
+  .rating {
+    width: 150px;
+  }
+
+  .servings {
+    width: 80px;
+  }
+
+  .prep_item {
+    width: 130px;
+  }
+}

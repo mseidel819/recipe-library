@@ -4,9 +4,10 @@ import FuzzySearch from "fuzzy-search";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import PreviewCard from "../card-preview/card-preview.component";
+import CardPreviewLoader from "../loaders/preview-card/card-preview-loader.component";
 import styles from "./card-list.module.css";
 
-const CardList = ({ data, category }) => {
+const CardList = ({ data, category, isPending }) => {
   const [searchField, setSearchField] = useState("");
   const [filteredData, setFilteredData] = useState(data);
 
@@ -35,9 +36,14 @@ const CardList = ({ data, category }) => {
       />
 
       <div className={styles.container}>
-        {filteredData.map((card) => (
-          <PreviewCard key={card.id} category={category} {...card} />
-        ))}
+        {isPending &&
+          Array(10)
+            .fill()
+            .map((_, i) => <CardPreviewLoader key={i} />)}
+        {!isPending &&
+          filteredData?.map((card) => (
+            <PreviewCard key={card.id} category={category} {...card} />
+          ))}
       </div>
     </div>
   );

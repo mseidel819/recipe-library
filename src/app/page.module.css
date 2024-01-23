@@ -26,6 +26,10 @@
   border-radius: 4px;
 }
 
+.loader {
+  margin-top: 150px;
+}
+
 @media (prefers-color-scheme: dark) {
   .list_item {
     background-color: rgb(79, 3, 52);
