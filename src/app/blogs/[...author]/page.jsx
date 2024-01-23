@@ -40,6 +40,7 @@ const AuthorPage = ({ params }) => {
         page={+page}
         shape="rounded"
         onChange={handlePageChange}
+        size="small"
       />
     </div>
   );
