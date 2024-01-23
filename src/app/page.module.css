@@ -35,4 +35,8 @@
     background-color: rgb(79, 3, 52);
     border: 1px solid rgb(79, 78, 78);
   }
+  .main {
+    background-color: #1f1f1f;
+    color: white;
+  }
 }

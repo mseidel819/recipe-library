@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import useSetTheme from "@/hooks/useSetTheme";
 import useFetchAuthors from "@/hooks/useFetchAuthors";
 import BasicTabs from "@/components/tabs/tabs.component";
 import styles from "./layout.module.css";
@@ -13,7 +12,6 @@ const TabsLayout = ({ children }) => {
   const [selectedAuthor, setSelectedAuthor] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const theme = useSetTheme();
   const { data } = useFetchAuthors();
 
   const setAuthorHandler = (author) => {

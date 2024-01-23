@@ -15,14 +15,17 @@ const AuthorPage = ({ params }) => {
   const [searchField, setSearchField] = useState("");
   const page = searchParams.get("page") || 1;
 
+  const PAGE_SIZE = 15;
+
   const { isPending, isFetching, isError, data } = useFetchRecipes(
     author_id,
     category,
     page,
-    searchField
+    searchField,
+    PAGE_SIZE
   );
 
-  const totalPages = data?.count ? Math.ceil(data.count / 15) : 1;
+  const totalPages = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 1;
 
   const handlePageChange = (event, value) => {
     router.push(`/blogs/${author_id}/${category}/?page=${value}`);
