@@ -6,9 +6,10 @@ refresh resets page number. stop that.
 image preview stretching
 error states
 
+-ssr?
+
 Nav-bar:
 
 - [] Home
 - [] favorites
 - [] login/logout
-- [] search all
