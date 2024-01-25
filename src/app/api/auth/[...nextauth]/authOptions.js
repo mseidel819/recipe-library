@@ -15,7 +15,7 @@ const SIGN_IN_HANDLERS = {
 };
 const SIGN_IN_PROVIDERS = Object.keys(SIGN_IN_HANDLERS);
 
-export const authOptions = {
+const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/auth",
@@ -95,3 +95,5 @@ export const authOptions = {
     },
   },
 };
+
+export default authOptions;

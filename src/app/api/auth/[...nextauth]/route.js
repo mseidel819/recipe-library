@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 // import { authenticateUser } from "../../../../utils/authenticate";
 // import CredentialsProvider from "next-auth/providers/credentials";
-import { authOptions } from "./authOptions";
+import authOptions from "./authOptions";
 
 // const url = process.env.NEXT_PUBLIC_API_URL;
 
