@@ -1,11 +1,24 @@
 "use client";
-import { signIn, useSession } from "next-auth/react";
+import { useSession, signOut as authSignOut } from "next-auth/react";
 
 import styles from "./nav-bar.module.css";
 import Link from "next/link";
 
 const NavBar = () => {
   const { data: session, status } = useSession();
+
+  console.log(session);
+  const url = process.env.NEXT_PUBLIC_API_URL;
+  const signOut = async () => {
+    const response = await fetch(`${url}/api/user/logout/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const response2 = await authSignOut();
+  };
 
   return (
     <nav className={styles.navBar}>
@@ -16,15 +29,12 @@ const NavBar = () => {
       </Link>
       <ul className={styles.navBarList}>
         <li className={styles.navBarListItem}>
-          <Link href="/blogs/">Favorites</Link>
+          {session && <Link href="/blogs/">Favorites</Link>}
         </li>
         <li className={styles.navBarListItem}>
-          {session && <Link href="/contact">Log out</Link>}
-          {!session && (
-            <button onClick={() => signIn(undefined, { callbackUrl: "/" })}>
-              Sign in
-            </button>
-          )}
+          {session && <p>{session.user.email}</p>}
+          {!session && <Link href="/auth">Sign in</Link>}
+          {session && <button onClick={() => signOut()}>Log out</button>}
         </li>
       </ul>
     </nav>
