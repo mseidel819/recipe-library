@@ -4,7 +4,7 @@ import "./globals.css";
 import React from "react";
 import QueryProvider from "./providers";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import authOptions from "@/app/api/auth/[...nextauth]/authOptions";
 
 const inter = Inter({ subsets: ["latin"] });
 
