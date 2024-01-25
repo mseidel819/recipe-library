@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import { authenticateUser } from "../../../../utils/authenticate";
-import type { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const url = process.env.NEXT_PUBLIC_API_URL;
@@ -18,7 +17,7 @@ const SIGN_IN_HANDLERS = {
 };
 const SIGN_IN_PROVIDERS = Object.keys(SIGN_IN_HANDLERS);
 
-export const authOptions: AuthOptions = {
+export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/auth",
