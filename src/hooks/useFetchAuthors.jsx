@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 const fetchAuthors = () => {
   const url = process.env.NEXT_PUBLIC_API_URL;
 
-  return fetch(`${url}api/blog-recipes/authors`)
+  return fetch(`${url}/api/blog-recipes/authors`)
     .then((res) => {
       return res.json();
     })
