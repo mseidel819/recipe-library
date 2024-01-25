@@ -70,6 +70,7 @@ export const authOptions: AuthOptions = {
         token["access_token"] = backendResponse.access;
         token["refresh_token"] = backendResponse.refresh;
         token["ref"] = getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME;
+        console.log("token", token);
         return token;
       }
       // Refresh the backend token if necessary

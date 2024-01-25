@@ -7,7 +7,7 @@ import Link from "next/link";
 const NavBar = () => {
   const { data: session, status } = useSession();
 
-  console.log(session);
+  //   console.log(session);
   const url = process.env.NEXT_PUBLIC_API_URL;
   const signOut = async () => {
     const response = await fetch(`${url}/api/user/logout/`, {
@@ -29,7 +29,7 @@ const NavBar = () => {
       </Link>
       <ul className={styles.navBarList}>
         <li className={styles.navBarListItem}>
-          {session && <Link href="/blogs/">Favorites</Link>}
+          {session && <Link href="/favorites">Favorites</Link>}
         </li>
         <li className={styles.navBarListItem}>
           {session && <p>{session.user.email}</p>}
