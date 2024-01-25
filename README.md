@@ -7,13 +7,3 @@ image preview stretching
 error states
 
 -ssr?
-
-Nav-bar:
-
-- [] Home
-- [] favorites
-- [] login/logout
-
-match encyption with django.
-make and test routes to auth.
-getting jwt. now how do i use it and how to i get my session to go.
