@@ -20,10 +20,10 @@ const signIn = async (email, password) => {
   const username = email;
 
   const result = await authSignIn("credentials", {
-    redirect: true,
+    redirect: false,
     email,
     password,
-    callbackUrl: "/",
+    // callbackUrl: "/",
   });
 };
 

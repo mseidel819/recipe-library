@@ -8,7 +8,7 @@ const fetchFavorites = (session) => {
   };
 
   // If the session contains a JWT token, include it in the headers
-  // console.log(session);
+  if (!session) return [];
   if (session?.access_token) {
     headers["Authorization"] = `Bearer ${session.access_token}`;
   }

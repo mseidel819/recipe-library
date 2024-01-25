@@ -7,3 +7,11 @@ image preview stretching
 error states
 
 -ssr?
+
+login error handling.
+redirect on succesful login. not on fail.
+show error message on fail.
+
+sign up error handling.
+redirect on succesful signup. not on fail.
+show error if email already in use.

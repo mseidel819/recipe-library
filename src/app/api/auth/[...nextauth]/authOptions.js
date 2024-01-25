@@ -39,6 +39,9 @@ const authOptions = {
             },
           });
           const data = await response.json();
+          if (data.non_field_errors) {
+            throw new Error(data.non_field_errors[0]);
+          }
           if (data) return data;
         } catch (error) {
           console.error("in credentials prov", error);
