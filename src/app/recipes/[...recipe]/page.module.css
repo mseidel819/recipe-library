@@ -8,10 +8,16 @@
 .link {
   color: rgb(74, 74, 249);
 }
+
+.back_nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
 .back_btn {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
 }
 
 .info_container {

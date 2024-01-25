@@ -1,0 +1,13 @@
+.back_btn {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.text {
+  text-align: center;
+}

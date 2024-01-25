@@ -3,14 +3,17 @@
 import CardList from "@/components/card-list/card-list.component";
 import TabsLayout from "../layout";
 import useFetchRecipes from "@/hooks/useFetchRecipes";
+import useFetchFavorites from "@/hooks/useFetchFavorites";
 import { Pagination, TextField } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 import styles from "./page.module.css";
 import { useState } from "react";
 
 const AuthorPage = ({ params }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
   const [author_id, category] = params.author;
   const [searchField, setSearchField] = useState("");
   const page = searchParams.get("page") || 1;
@@ -24,6 +27,9 @@ const AuthorPage = ({ params }) => {
     searchField,
     PAGE_SIZE
   );
+
+  const { data: favorites } = useFetchFavorites(session);
+  const favoritesIds = favorites?.map((fav) => fav.id);
 
   const totalPages = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 1;
 
@@ -52,7 +58,11 @@ const AuthorPage = ({ params }) => {
         autoComplete="off"
         size="small"
       />
-      <CardList data={data?.results} isPending={isPending} />
+      <CardList
+        fav_ids={favoritesIds}
+        data={data?.results}
+        isPending={isPending}
+      />
       {totalPages > 1 && (
         <Pagination
           className={styles.pagination}
