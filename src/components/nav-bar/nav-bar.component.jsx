@@ -32,7 +32,6 @@ const NavBar = () => {
           {session && (
             <Link href="/favorites">
               <Favorite
-                // fontSize="medium"
                 sx={{
                   color: pink[800],
                 }}
