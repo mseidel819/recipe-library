@@ -38,8 +38,6 @@ const Recipe = ({ params }) => {
     data: favs,
   } = useFetchFavorites(session);
 
-  // check if recipe_id is in favs
-
   const isFavorite = favs?.some((fav) => fav.id === +recipe_id);
   useEffect(() => {
     setChecked(isFavorite);

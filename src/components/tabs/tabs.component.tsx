@@ -8,7 +8,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
-import type { Author } from "../../types";
+import type { Author } from "../../../types/types";
 
 function a11yProps(index: number) {
   return {

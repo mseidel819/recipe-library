@@ -12,8 +12,6 @@
 
 .card_preview_loader_img {
   width: 74px;
-  /* height: 100px; */
-  /* position: relative; */
 }
 
 .card_preview_loader__text {
@@ -22,9 +20,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.card_preview_loader__title {
 }
 
 .card_preview_loader__rating {

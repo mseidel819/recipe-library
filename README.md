@@ -4,6 +4,9 @@ TODO:
 refresh resets page number. stop that.
 
 image preview stretching
-error states
+fetching error states
 
 -ssr?
+
+theme variables
+forgot password reset

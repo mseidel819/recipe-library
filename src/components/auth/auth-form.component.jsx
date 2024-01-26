@@ -1,4 +1,4 @@
-import { useState, useRef, FormEvent } from "react";
+import { useState } from "react";
 import { signIn as authSignIn } from "next-auth/react";
 import classes from "./auth-form.module.css";
 import { useRouter } from "next/navigation";

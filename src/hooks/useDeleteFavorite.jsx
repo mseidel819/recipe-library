@@ -22,15 +22,6 @@ const deleteFavorite = ({ session, recipe_id }) => {
     .then((data) => data);
 };
 
-// const useDeleteFavorites = (session, recipe_id, checked) => {
-//   if (!checked) return;
-//   return useMutation({
-//     mutationFn: () => deleteFavorite(session, recipe_id),
-//     onSuccess: () => {
-//       queryClient.invalidateQueries(["favorites"]);
-//     },
-//   });
-// };
 const useDeleteFavorites = (session, recipe_id, checked) => {
   const mutation = useMutation({
     mutationFn: () => deleteFavorite(session, recipe_id),
