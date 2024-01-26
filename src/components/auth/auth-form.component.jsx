@@ -14,17 +14,36 @@ const createUser = async (email, password1, password2) => {
       "Content-Type": "application/json",
     },
   });
+
+  if (!response.ok) {
+    const errorData = await response;
+    throw new Error(
+      errorData.message ||
+        "Something went wrong. This email may already be registered."
+    );
+  }
 };
 const signIn = async (email, password) => {
   const url = process.env.NEXT_PUBLIC_API_URL;
   const username = email;
 
-  const result = await authSignIn("credentials", {
+  const response = await authSignIn("credentials", {
     redirect: false,
     email,
     password,
     // callbackUrl: "/",
   });
+
+  if (!response.ok) {
+    const errorData = await response;
+    throw new Error(errorData.message || "Sign-in failed.");
+  }
+
+  if (response.ok) {
+    const data = await response;
+
+    return data;
+  }
 };
 
 function AuthForm() {
@@ -60,6 +79,9 @@ function AuthForm() {
       }
 
       const result2 = await signIn(enteredEmail, enteredPasword);
+      if (result2.ok) {
+        router.replace("/");
+      }
     } catch (err) {
       console.log("oops", err);
     }
