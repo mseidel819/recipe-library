@@ -1,6 +1,8 @@
 "use client";
 import { useSession, signOut as authSignOut } from "next-auth/react";
 import BakeryDiningIcon from "@mui/icons-material/BakeryDining";
+import { pink } from "@mui/material/colors";
+import Favorite from "@mui/icons-material/Favorite";
 
 import styles from "./nav-bar.module.css";
 import Link from "next/link";
@@ -22,12 +24,21 @@ const NavBar = () => {
 
   return (
     <nav className={styles.navBar}>
-      <div className={styles.title}>
+      <Link href="/" className={styles.title}>
         <BakeryDiningIcon fontSize="large" />
-      </div>
+      </Link>
       <ul className={styles.navBarList}>
         <li className={styles.navBarListItem}>
-          {session && <Link href="/favorites">Favorites</Link>}
+          {session && (
+            <Link href="/favorites">
+              <Favorite
+                // fontSize="medium"
+                sx={{
+                  color: pink[800],
+                }}
+              />
+            </Link>
+          )}
         </li>
         <li className={`${styles.navBarListItem} ${styles.userContainer}`}>
           {session && <p className={styles.userName}>{session.user?.email}</p>}
