@@ -1,12 +1,13 @@
 .container {
+  margin-top: 12px;
   max-width: 700px;
-  background-color: rgb(246, 228, 207);
-  border-radius: 10px;
+  background-color: var(--clr-gray-light);
+  border-radius: var(--border-radius);
   padding: 16px;
 }
 
 .link {
-  color: rgb(74, 74, 249);
+  color: var(--clr-link);
 }
 
 .back_nav {
@@ -28,7 +29,6 @@
   flex-direction: row;
   justify-content: space-between;
   row-gap: 16px;
-  /* align-items: center; */
 }
 .scores {
   display: flex;
@@ -41,10 +41,7 @@
 
 @media (prefers-color-scheme: dark) {
   .container {
-    background-color: rgb(27, 26, 26);
-  }
-  .link {
-    color: rgb(160, 160, 244);
+    background-color: var(--clr-gray-darkest);
   }
 }
 
@@ -54,7 +51,6 @@
   }
   .info_container {
     margin-top: 16px;
-    /* margin-bottom: 16px; */
   }
   .back_btn {
     margin-bottom: 4px;
@@ -63,11 +59,9 @@
     margin-bottom: 16px;
   }
   .scores {
-    /* margin-right: 16px; */
     font-size: 12px;
   }
   .times {
-    /* margin-left: 16px; */
     font-size: 12px;
   }
 }

@@ -1,7 +1,7 @@
 .card_preview_loader {
-  background-color: rgb(241, 241, 241);
+  background-color: var(--clr-gray-light);
 
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   width: 100%;
   max-width: 300px;
   height: 100px;
@@ -28,6 +28,6 @@
 
 @media (prefers-color-scheme: dark) {
   .card_preview_loader {
-    background-color: rgb(27, 26, 26);
+    background-color: var(--clr-gray-darkest);
   }
 }

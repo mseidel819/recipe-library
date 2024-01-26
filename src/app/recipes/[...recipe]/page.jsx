@@ -88,19 +88,21 @@ const Recipe = ({ params }) => {
               <ArrowBackIcon />
               Back
             </button>
-            <Checkbox
-              sx={{
-                color: pink[800],
-                "&.Mui-checked": {
-                  color: pink[600],
-                },
-              }}
-              {...label}
-              icon={<FavoriteBorder />}
-              checkedIcon={<Favorite />}
-              onChange={handleFavorite}
-              checked={checked}
-            />
+            {session && (
+              <Checkbox
+                sx={{
+                  color: pink[800],
+                  "&.Mui-checked": {
+                    color: pink[600],
+                  },
+                }}
+                {...label}
+                icon={<FavoriteBorder />}
+                checkedIcon={<Favorite />}
+                onChange={handleFavorite}
+                checked={checked}
+              />
+            )}
           </div>
 
           <h1 className={styles.title}>{recipe.title}</h1>

@@ -1,10 +1,16 @@
 .toggle {
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--clr-black);
 }
 
 .toggle:hover {
-  color: rgb(182, 179, 179);
-  border-bottom: 1px solid rgb(182, 179, 179);
+  color: var(--clr-gray-lighter);
+  border-bottom: 1px solid var(--clr-gray-lighter);
+}
+
+@media (prefers-color-scheme: dark) {
+  .toggle {
+    border-bottom: 1px solid var(--clr-white);
+  }
 }

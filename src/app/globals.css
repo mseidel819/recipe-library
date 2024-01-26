@@ -1,9 +1,46 @@
 :root {
   --max-width: 1000px;
-  --border-radius: 12px;
+  --border-radius: 4px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  --clr-black: #1f1f1f;
+  --clr-gray-darkest: rgb(27, 26, 26);
+
+  --clr-gray-dark: #2f2f2f;
+  --clr-gray: #3f3f3f;
+  --clr-gray-light: rgb(241, 241, 241);
+  --clr-gray-lighter: rgb(182, 179, 179);
+  --clr-white: #ffffff;
+
+  --clr-primary: rgb(252, 224, 249);
+
+  --clr-link: rgb(74, 74, 249);
+
+  --font-size-xxs: 12px;
+  --font-size-xs: 14px;
+  --font-size-sm: 16px;
+  --font-size-md: 18px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --clr-black: #1f1f1f;
+    --clr-gray-darkest: rgb(27, 26, 26);
+    --clr-gray-dark: rgb(54, 53, 53);
+    --clr-gray: #3f3f3f;
+    --clr-gray-light: #4f4f4f;
+    --clr-gray-lighter: rgb(182, 179, 179);
+
+    --clr-white: #ffffff;
+
+    --clr-primary: rgb(79, 3, 52);
+
+    --clr-link: rgb(160, 160, 244);
+  }
 }
 
 * {
@@ -47,16 +84,16 @@ button {
     color-scheme: dark;
   }
   body {
-    background-color: #1f1f1f !important;
-    color: white;
+    background-color: var(--clr-black) !important;
+    color: var(--clr-white);
   }
 }
 
 @media screen and (max-width: 500px) {
   h1 {
-    font-size: 24px;
+    font-size: var(--font-size-xl);
   }
   a {
-    font-size: 12px;
+    font-size: var(--font-size-sm);
   }
 }

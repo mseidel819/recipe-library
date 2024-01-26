@@ -1,6 +1,6 @@
 .container {
   width: 100vw;
-  max-width: 1000px;
+  max-width: var(--max-width);
 }
 .back_btn {
   display: flex;
