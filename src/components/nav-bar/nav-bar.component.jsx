@@ -22,9 +22,9 @@ const NavBar = () => {
 
   return (
     <nav className={styles.navBar}>
-      <div className={styles.title}>
+      <Link href="/" className={styles.title}>
         <BakeryDiningIcon fontSize="large" />
-      </div>
+      </Link>
       <ul className={styles.navBarList}>
         <li className={styles.navBarListItem}>
           {session && <Link href="/favorites">Favorites</Link>}
