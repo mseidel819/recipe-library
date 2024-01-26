@@ -3,6 +3,7 @@
   justify-content: space-between;
   padding: 8px 12px;
   /* width: 100vh; */
+  background-color: rgb(230, 228, 228);
 }
 
 .navBarList {
@@ -16,18 +17,55 @@
 .title {
   display: flex;
   flex-direction: column;
-  line-height: 0.8rem;
+}
+
+.logBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 4px 8px;
+  border-radius: 4px;
   background-color: rgb(252, 224, 249);
   border: 1px solid rgb(79, 78, 78);
-  padding: 0.5rem;
-  border-radius: 0.5rem 0 0.5rem 0;
+}
+
+.userContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.logout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0px 8px;
+  border-radius: 4px;
+  background-color: rgb(252, 224, 249);
+  border: 1px solid rgb(79, 78, 78);
+}
+
+.userName {
+  font-size: 12px;
+  font-weight: bold;
 }
 
 @media (prefers-color-scheme: dark) {
-  .title {
+  .navBar {
+    background-color: rgb(53, 52, 52);
+  }
+  .logBtn {
     background-color: rgb(79, 3, 52);
     border: 1px solid rgb(79, 78, 78);
-    padding: 0.3rem;
+  }
+
+  .logout {
+    background-color: rgb(79, 3, 52);
+    border: 1px solid rgb(79, 78, 78);
   }
 }
 

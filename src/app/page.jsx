@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <h1>Select a blog to begin</h1>
+      <h1 className={styles.title}>Select a blog to begin</h1>
       {isPending && (
         <div className={styles.loader}>
           <PanLoader />

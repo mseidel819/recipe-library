@@ -1,5 +1,6 @@
 "use client";
 import { useSession, signOut as authSignOut } from "next-auth/react";
+import BakeryDiningIcon from "@mui/icons-material/BakeryDining";
 
 import styles from "./nav-bar.module.css";
 import Link from "next/link";
@@ -21,19 +22,25 @@ const NavBar = () => {
 
   return (
     <nav className={styles.navBar}>
-      <Link href="/" className={styles.title}>
-        <span>JustGiveMeTheRecipe-</span>
-        <span>IdidntAskForYourLifeStory-</span>
-        <span>OrAllOfTheseAds.com</span>
-      </Link>
+      <div className={styles.title}>
+        <BakeryDiningIcon fontSize="large" />
+      </div>
       <ul className={styles.navBarList}>
         <li className={styles.navBarListItem}>
           {session && <Link href="/favorites">Favorites</Link>}
         </li>
-        <li className={styles.navBarListItem}>
-          {session && <p>{session.user?.email}</p>}
-          {!session && <Link href="/auth">Sign in</Link>}
-          {session && <button onClick={() => signOut()}>Log out</button>}
+        <li className={`${styles.navBarListItem} ${styles.userContainer}`}>
+          {session && <p className={styles.userName}>{session.user?.email}</p>}
+          {!session && (
+            <Link className={styles.logBtn} href="/auth">
+              Sign in
+            </Link>
+          )}
+          {session && (
+            <button className={styles.logout} onClick={() => signOut()}>
+              Log out
+            </button>
+          )}
         </li>
       </ul>
     </nav>

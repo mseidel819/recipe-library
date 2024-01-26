@@ -7,6 +7,9 @@
   width: 100%;
   max-width: 1000px;
 }
+.title {
+  margin-top: 16px;
+}
 
 .list {
   margin-top: 32px;
