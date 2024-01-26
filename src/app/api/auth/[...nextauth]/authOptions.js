@@ -39,8 +39,8 @@ const authOptions = {
             },
           });
           const data = await response.json();
-          if (data.non_field_errors) {
-            throw new Error(data.non_field_errors[0]);
+          if (!data.user) {
+            throw new Error("Authentication failed");
           }
           if (data) return data;
         } catch (error) {
@@ -91,6 +91,14 @@ const authOptions = {
         token["ref"] = getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME;
       }
       return token;
+    },
+    async error(error, req, res) {
+      // Handle the error
+      console.error("NextAuth error:", error);
+
+      // Redirect the user to the sign-in page with an error message
+      // const redirectUrl = `/auth?error=${encodeURIComponent(error.message)}`;
+      return Promise.resolve(redirectUrl);
     },
 
     async session({ token }) {

@@ -2,6 +2,8 @@ import { useState, useRef, FormEvent } from "react";
 import { signIn as authSignIn } from "next-auth/react";
 import classes from "./auth-form.module.css";
 import { useRouter } from "next/navigation";
+import SignIn from "../signin/signin.component";
+import SignUp from "../signup/signup.component";
 import React from "react";
 
 const createUser = async (email, password1, password2) => {
@@ -31,12 +33,11 @@ const signIn = async (email, password) => {
     redirect: false,
     email,
     password,
-    // callbackUrl: "/",
   });
 
   if (!response.ok) {
-    const errorData = await response;
-    throw new Error(errorData.message || "Sign-in failed.");
+    const errorData = await response.error;
+    throw new Error(errorData || "Sign-in failed.");
   }
 
   if (response.ok) {
@@ -47,30 +48,35 @@ const signIn = async (email, password) => {
 };
 
 function AuthForm() {
-  const emailInpufRef = useRef();
-  const passwordInputRef = useRef();
-  const passwordConfirmInputRef = useRef();
-  const usernameInpufRef = useRef();
   const [isLogin, setIsLogin] = useState(true);
 
-  const [requestError, setRequestError] = useState();
+  const [errorState, setErrorState] = useState("");
   const router = useRouter();
 
   function switchAuthModeHandler() {
     setIsLogin((prevState) => !prevState);
+    setErrorState("");
   }
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (
+    e,
+    enteredEmail,
+    enteredPasword,
+    enteredPasswordConfirm = ""
+  ) => {
     e.preventDefault();
 
-    const enteredEmail = emailInpufRef.current.value;
-    const enteredPasword = passwordInputRef.current.value;
-
     try {
+      if (!enteredEmail) {
+        throw new Error("Please enter a valid email address");
+      }
+      if (!enteredPasword) {
+        throw new Error("Please enter a valid password");
+      }
       if (!isLogin) {
-        // const enteredUsername = usernameInpufRef.current.value;
-        const enteredPasswordConfirm = passwordConfirmInputRef.current.value;
-
+        if (enteredPasword !== enteredPasswordConfirm) {
+          throw new Error("Passwords do not match");
+        }
         const result = await createUser(
           enteredEmail,
           enteredPasword,
@@ -83,49 +89,31 @@ function AuthForm() {
         router.replace("/");
       }
     } catch (err) {
-      console.log("oops", err);
+      let errMsg = err.message;
+      if (err.message === "CredentialsSignin") {
+        errMsg = "Invalid email or password";
+      }
+      setErrorState(errMsg);
+      console.error(errMsg);
     }
   };
 
   return (
     <section className={classes.auth}>
-      <h1>{isLogin ? "Login" : "Sign Up"}</h1>
-      <form onSubmit={submitHandler}>
-        <div className={classes.control}>
-          <label htmlFor="email">Your Email</label>
-          <input type="email" id="email" required ref={emailInpufRef} />
-        </div>
-        <div className={classes.control}>
-          {!isLogin && <label htmlFor="password">Create Password</label>}
-          {isLogin && <label htmlFor="password">Your Password</label>}
-          <input
-            type="password"
-            id="password"
-            required
-            ref={passwordInputRef}
-          />
-        </div>
-        {!isLogin && (
-          <div className={classes.control}>
-            <label htmlFor="password">Confirm Password</label>
-            <input
-              type="password"
-              id="password"
-              required
-              ref={passwordConfirmInputRef}
-            />
-          </div>
-        )}
-        <div className={classes.actions}>
-          <button>{isLogin ? "Login" : "Create Account"}</button>
-          <button
-            type="button"
-            className={classes.toggle}
-            onClick={switchAuthModeHandler}>
-            {isLogin ? "Create new account" : "Login with existing account"}
-          </button>
-        </div>
-      </form>
+      {isLogin && (
+        <SignIn
+          submitHandler={submitHandler}
+          isLoginHandler={switchAuthModeHandler}
+          errorState={errorState}
+        />
+      )}
+      {!isLogin && (
+        <SignUp
+          submitHandler={submitHandler}
+          isLoginHandler={switchAuthModeHandler}
+          errorState={errorState}
+        />
+      )}
     </section>
   );
 }
