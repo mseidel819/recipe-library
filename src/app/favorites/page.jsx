@@ -18,7 +18,7 @@ const FavoritesPage = () => {
   }
   if (session) {
     return (
-      <div>
+      <div className={styles.container}>
         <button className={styles.back_btn} onClick={() => router.back()}>
           <ArrowBackIcon />
           Back
