@@ -9,8 +9,8 @@ import authOptions from "@/app/api/auth/[...nextauth]/authOptions";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Just the recipes!",
-  description: "recipes without the ads and life stories",
+  title: "Junk-free recipes!",
+  description: "Recipes without the ads and life stories.",
 };
 
 export default async function RootLayout({
@@ -19,7 +19,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-  console.log("session BOOM", session);
 
   return (
     <html lang="en">
