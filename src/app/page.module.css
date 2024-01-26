@@ -1,12 +1,20 @@
+.container {
+  width: 100vw;
+  max-width: 1000px;
+}
+
 .main {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
   align-items: center;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 1000px;
+  /* width: 100%; */
+  max-width: fit-content;
+  margin: 1rem auto;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 1.5rem 1.5rem;
 }
+
 .title {
   margin-top: 16px;
 }
@@ -18,12 +26,10 @@
 }
 
 .list_item {
-  /* remove dots */
   list-style-type: none;
   margin-left: -20px;
   margin-bottom: 8px;
   padding: 4px 8px;
-  /* overflow: hidden; */
   background-color: rgb(252, 224, 249);
   border: 1px solid rgb(79, 78, 78);
   border-radius: 4px;
@@ -39,7 +45,7 @@
     border: 1px solid rgb(79, 78, 78);
   }
   .main {
-    background-color: #1f1f1f;
+    background-color: rgb(54, 53, 53);
     color: white;
   }
 }
