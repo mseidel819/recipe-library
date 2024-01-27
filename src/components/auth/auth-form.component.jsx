@@ -21,7 +21,7 @@ const createUser = async (email, password1, password2) => {
     const errorData = await response;
     throw new Error(
       errorData.message ||
-        "Something went wrong. This email may already be registered."
+        "Something went wrong. This email may already be registered, or password isnt strong enough."
     );
   }
 };
