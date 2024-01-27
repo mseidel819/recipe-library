@@ -17,12 +17,17 @@ const createUser = async (email, password1, password2) => {
     },
   });
 
+  // WORKING ON THIS
   if (!response.ok) {
-    const errorData = await response;
-    throw new Error(
-      errorData.message ||
-        "Something went wrong. This email may already be registered, or password isnt strong enough."
-    );
+    const errorData = await response.json();
+    console.log(errorData);
+
+    throw new Error(errorData || "Something went wrong.");
+  }
+
+  if (response.ok) {
+    const data = await response.json();
+    return data;
   }
 };
 const signIn = async (email, password) => {
@@ -55,7 +60,7 @@ function AuthForm() {
 
   function switchAuthModeHandler() {
     setIsLogin((prevState) => !prevState);
-    setErrorState("");
+    setErrorState({});
   }
 
   const submitHandler = async (
@@ -97,6 +102,27 @@ function AuthForm() {
       console.error(errMsg);
     }
   };
+  // const test = {
+  //   username: [
+  //     ErrorDetail(
+  //       (string = "User with this email already exists."),
+  //       (code = "invalid")
+  //     ),
+  //   ],
+  //   email: [
+  //     ErrorDetail(
+  //       (string = "A user is already registered with this e-mail address."),
+  //       (code = "invalid")
+  //     ),
+  //   ],
+  //   password1: [
+  //     ErrorDetail(
+  //       (string =
+  //         "This password is too short. It must contain at least 6 characters."),
+  //       (code = "password_too_short")
+  //     ),
+  //   ],
+  // };
 
   return (
     <section className={classes.auth}>
