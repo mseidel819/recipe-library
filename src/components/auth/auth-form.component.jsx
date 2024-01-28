@@ -18,11 +18,16 @@ const createUser = async (email, password1, password2) => {
   });
 
   if (!response.ok) {
-    const errorData = await response;
-    throw new Error(
-      errorData.message ||
-        "Something went wrong. This email may already be registered, or password isnt strong enough."
-    );
+    const errorData = await response.json();
+    errorData.error = true;
+    return errorData;
+  }
+
+  if (response.ok) {
+    const data = await response.json();
+    data.error = false;
+
+    return data;
   }
 };
 const signIn = async (email, password) => {
@@ -35,16 +40,17 @@ const signIn = async (email, password) => {
     password,
   });
 
-  if (!response.ok) {
-    const errorData = await response.error;
-    throw new Error(errorData || "Sign-in failed.");
-  }
+  // if (!response.ok) {
+  //   console.log("NOT OK", response);
+  //   const errorData = await response.error;
+  //   throw new Error(errorData || "Sign-in failed.");
+  // }
 
-  if (response.ok) {
-    const data = await response;
+  // if (response.ok) {
+  const data = await response;
 
-    return data;
-  }
+  return data;
+  // }
 };
 
 function AuthForm() {
@@ -55,7 +61,7 @@ function AuthForm() {
 
   function switchAuthModeHandler() {
     setIsLogin((prevState) => !prevState);
-    setErrorState("");
+    setErrorState({});
   }
 
   const submitHandler = async (
@@ -68,33 +74,52 @@ function AuthForm() {
 
     try {
       if (!enteredEmail) {
-        throw new Error("Please enter a valid email address");
+        setErrorState({ email: ["Please enter a valid email address"] });
+        throw new Error(
+          JSON.stringify({ email: ["Please enter a valid email address"] })
+        );
       }
       if (!enteredPasword) {
-        throw new Error("Please enter a valid password");
+        setErrorState({ password1: ["Please enter a valid password"] });
+
+        throw new Error(
+          JSON.stringify({ password1: ["Please enter a valid password"] })
+        );
       }
       if (!isLogin) {
         if (enteredPasword !== enteredPasswordConfirm) {
-          throw new Error("Passwords do not match");
+          setErrorState({ password1: ["Passwords do not match"] });
+
+          throw new Error(
+            JSON.stringify({ password1: ["Passwords do not match"] })
+          );
         }
+
         const result = await createUser(
           enteredEmail,
           enteredPasword,
           enteredPasswordConfirm
         );
+        if (result.error && result.error === true) {
+          setErrorState(result);
+          throw new Error(JSON.stringify(result));
+        }
       }
 
       const result2 = await signIn(enteredEmail, enteredPasword);
       if (result2.ok) {
         router.replace("/");
       }
-    } catch (err) {
-      let errMsg = err.message;
-      if (err.message === "CredentialsSignin") {
-        errMsg = "Invalid email or password";
+      console.log("RESULT2", result2);
+      if (!result2.ok) {
+        setErrorState({
+          password1: ["Invalid email or password"],
+          email: ["Invalid email or password"],
+        });
+        throw new Error(JSON.stringify(result2.error));
       }
-      setErrorState(errMsg);
-      console.error(errMsg);
+    } catch (err) {
+      console.error(err.message);
     }
   };
 

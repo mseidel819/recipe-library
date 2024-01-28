@@ -21,13 +21,18 @@ type Props = {
     password: FormDataEntryValue | null
     // passwordConfirm?: FormDataEntryValue | null
   ) => void;
-  errorState: string;
+  errorState: {
+    email?: string;
+    password1?: string;
+    error: boolean;
+    username?: string;
+  };
 };
 
 export default function SignIn({
   isLoginHandler,
   submitHandler,
-  errorState = "",
+  errorState = { error: false },
 }: Props) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,17 +58,13 @@ export default function SignIn({
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        <Typography component="p">
+          Sign in to access your favorite recipes!
+        </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
-            error={
-              errorState === "Please enter a valid email address" ||
-              errorState === "Invalid email or password"
-            }
-            helperText={
-              errorState === "Please enter a valid email address"
-                ? errorState
-                : ""
-            }
+            error={errorState.email ? true : false}
+            helperText={errorState.email ? errorState.email : ""}
             margin="normal"
             required
             fullWidth
@@ -74,16 +75,8 @@ export default function SignIn({
             autoFocus
           />
           <TextField
-            error={
-              errorState === "Please enter a valid password" ||
-              errorState === "Invalid email or password"
-            }
-            helperText={
-              errorState === "Please enter a valid password" ||
-              errorState === "Invalid email or password"
-                ? errorState
-                : ""
-            }
+            error={errorState.password1 ? true : false}
+            helperText={errorState.password1 ? errorState.password1 : ""}
             margin="normal"
             required
             fullWidth

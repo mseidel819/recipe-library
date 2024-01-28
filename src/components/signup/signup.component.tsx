@@ -21,13 +21,18 @@ type Props = {
     password: FormDataEntryValue | null,
     passwordConfirm?: FormDataEntryValue | null
   ) => void;
-  errorState: string;
+  errorState: {
+    email?: string;
+    password1?: string;
+    error: boolean;
+    username?: string;
+  };
 };
 
 export default function SignUp({
   isLoginHandler,
   submitHandler,
-  errorState = "",
+  errorState = { error: false },
 }: Props) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -54,6 +59,9 @@ export default function SignUp({
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
+        <Typography component="p">
+          Sign up to access your favorite recipes!
+        </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             {/* <Grid item xs={12} sm={6}>
@@ -79,20 +87,8 @@ export default function SignUp({
             </Grid> */}
             <Grid item xs={12}>
               <TextField
-                error={
-                  errorState === "Please enter a valid email address" ||
-                  errorState === "Email already in use" ||
-                  errorState ===
-                    "Something went wrong. This email may already be registered."
-                }
-                helperText={
-                  errorState === "Please enter a valid email address" ||
-                  errorState === "Email already in use" ||
-                  errorState ===
-                    "Something went wrong. This email may already be registered."
-                    ? errorState
-                    : ""
-                }
+                error={errorState.email ? true : false}
+                helperText={errorState.email ? errorState.email : ""}
                 required
                 fullWidth
                 id="email"
@@ -103,16 +99,8 @@ export default function SignUp({
             </Grid>
             <Grid item xs={12}>
               <TextField
-                error={
-                  errorState === "Please enter a valid password" ||
-                  errorState === "Passwords do not match"
-                }
-                helperText={
-                  errorState === "Please enter a valid password" ||
-                  errorState === "Passwords do not match"
-                    ? errorState
-                    : ""
-                }
+                error={errorState.password1 ? true : false}
+                helperText={errorState.password1 ? errorState.password1 : ""}
                 required
                 fullWidth
                 name="password"
@@ -124,10 +112,10 @@ export default function SignUp({
             </Grid>
             <Grid item xs={12}>
               <TextField
-                error={errorState === "Passwords do not match"}
+                error={errorState.password1 == "Passwords do not match"}
                 helperText={
-                  errorState === "Passwords do not match"
-                    ? "Passwords don't match"
+                  errorState.password1 == "Passwords do not match"
+                    ? errorState.password1
                     : ""
                 }
                 required
