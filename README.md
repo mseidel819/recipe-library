@@ -1,4 +1,4 @@
-Live Site: <a href="https://peppy-alpaca-9050d7.netlify.app/" target="_blank">JunkFreeRecipes.com</a>
+Live Site: <a href="https://junkfreerecipes.netlify.app/" target="_blank">JunkFreeRecipes.com</a>
 
 TODO:
 refresh resets page number. stop that.
