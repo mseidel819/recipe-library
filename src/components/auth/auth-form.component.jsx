@@ -110,7 +110,6 @@ function AuthForm() {
       if (result2.ok) {
         router.replace("/");
       }
-      console.log("RESULT2", result2);
       if (!result2.ok) {
         setErrorState({
           password1: ["Invalid email or password"],
