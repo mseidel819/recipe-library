@@ -12,7 +12,7 @@ const NavBar = () => {
 
   const url = process.env.NEXT_PUBLIC_API_URL;
   const signOut = async () => {
-    const response = await fetch(`${url}/v1/api/user/logout/`, {
+    const response = await fetch(`${url}/api/user/logout/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
