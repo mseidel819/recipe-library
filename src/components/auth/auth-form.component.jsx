@@ -40,21 +40,13 @@ const signIn = async (email, password) => {
     password,
   });
 
-  // if (!response.ok) {
-  //   console.log("NOT OK", response);
-  //   const errorData = await response.error;
-  //   throw new Error(errorData || "Sign-in failed.");
-  // }
-
-  // if (response.ok) {
   const data = await response;
-
   return data;
-  // }
 };
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
+  const { status } = useSession();
 
   const [errorState, setErrorState] = useState("");
   const router = useRouter();
