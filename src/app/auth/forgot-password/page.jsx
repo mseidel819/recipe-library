@@ -2,6 +2,8 @@
 
 import ForgotPassword from "../../../components/forgot-password/forgot-password.component";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import styles from "./forgot-password.module.css";
 
 const requestReset = async (email) => {
   const url = process.env.NEXT_PUBLIC_API_URL;
@@ -30,18 +32,32 @@ const requestReset = async (email) => {
 
 const ForgotPasswordPage = () => {
   const router = useRouter();
+  const [submitted, setSubmitted] = useState(false);
+
   const handleSubmit = async (e, email) => {
     e.preventDefault();
 
     try {
       const data = await requestReset(email);
-      router.replace("/auth");
+      setSubmitted(true);
     } catch (error) {
       console.log(error);
     }
   };
 
-  return <ForgotPassword submitHandler={handleSubmit} />;
+  if (!submitted) {
+    return <ForgotPassword submitHandler={handleSubmit} />;
+  }
+  if (submitted) {
+    return (
+      <div className={styles.auth}>
+        <p>
+          If an account with that email exists, we sent you an email with
+          instructions to reset your password.
+        </p>
+      </div>
+    );
+  }
 };
 
 export default ForgotPasswordPage;

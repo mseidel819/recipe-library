@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import styles from "./reset-password.module.css";
+import { signIn } from "../utils/signin";
 
 export default function ResetPassword() {
   const [errorState, setErrorState] = useState("");
@@ -18,8 +19,8 @@ export default function ResetPassword() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const token = searchParams.get("token");
+  const email = searchParams.get("email");
   const url = process.env.NEXT_PUBLIC_API_URL;
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -56,7 +57,10 @@ export default function ResetPassword() {
       if (response.ok) {
         const data = await response.json();
         setErrorState("");
-        router.push("/auth");
+        // sign in
+        signIn(email, password);
+
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
