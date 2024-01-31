@@ -100,6 +100,7 @@ export default function ResetPassword() {
               id="password"
               label="New Password"
               name="password"
+              type="password"
               autoComplete="new-password"
               autoFocus
             />
@@ -112,6 +113,7 @@ export default function ResetPassword() {
               id="password-confirm"
               label="Confirm Password"
               name="password-confirm"
+              type="password"
               autoComplete="new-password"
               autoFocus
             />
