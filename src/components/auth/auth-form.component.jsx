@@ -46,7 +46,6 @@ const signIn = async (email, password) => {
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
-  const { status } = useSession();
 
   const [errorState, setErrorState] = useState("");
   const router = useRouter();
