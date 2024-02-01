@@ -15,6 +15,6 @@
 @media (prefers-color-scheme: dark) {
   .toggle {
     border-bottom: 1px solid var(--clr-white);
-    color: var(--clr-white);
+    color: var(--clr-white) !important;
   }
 }
