@@ -4,7 +4,7 @@
   border: none;
   border-bottom: 1px solid var(--clr-black);
   color: var(--clr-black) !important;
-  font-size: 14px !important;
+  font-size: 12px !important;
 }
 
 .toggle:hover {
